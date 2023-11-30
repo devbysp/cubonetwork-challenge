@@ -1,0 +1,28 @@
+{
+  "name": "cubonetwork-challange",
+  "version": "1.0.0",
+  "description": "https://github.com/cubonetwork/fullstack-challenge/blob/master/layout-onepage.png",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devbysp/cubonetwork-challage.git"
+  },
+  "keywords": [
+    "express",
+    "mysql"
+  ],
+  "author": "Zoltán Magyari",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devbysp/cubonetwork-challage/issues"
+  },
+  "homepage": "https://github.com/devbysp/cubonetwork-challage#readme",
+  "devDependencies": {
+    "eslint": "^8.54.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.0"
+  }
+}
