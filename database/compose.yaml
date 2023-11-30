@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+
+  database:
+    image: mysql:${MYSQL_VERSION}
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - '3306'
+
+  liquibase:
+    build:
+      context: ./liquibase
+      dockerfile: Dockerfile
+      args:
+        MYSQL_CONNECTOR_VERSION: ${MYSQL_CONNECTOR_VERSION}
+    volumes:
+      - ./liquibase/liquibase.properties:/liquibase.properties
+      - ./liquibase/changelog:/liquibase/changelog
+    command: ["/bin/sh", "-c", "/usr/local/bin/wait-for-it.sh database:3306 --timeout=0 -- && liquibase --defaultsFile=/liquibase.properties update"]
+    depends_on:
+      - database
+
+  adminer:
+    image: adminer
+    restart: always
+    depends_on:
+      - liquibase
+    ports:
+      - '8080'
+
+  nginx:
+    image: nginx:1.25.2-alpine-slim
+    volumes:
+      - .nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - adminer
+    ports:
+      - '80:80'
