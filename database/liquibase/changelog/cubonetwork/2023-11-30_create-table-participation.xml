@@ -3,8 +3,8 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-<changeSet id="create_table_participation" author="devbysp">
-  <createTable tableName="participation">
+<changeSet id="create_table_participants" author="devbysp">
+  <createTable tableName="participants">
     <column name="id" type="INT" autoIncrement="true">
       <constraints primaryKey="true" nullable="false"/>
     </column>
@@ -23,12 +23,12 @@
   </createTable>
 
   <addUniqueConstraint
-    constraintName="bk_person"
-    tableName="participation"
+    constraintName="bk_participant"
+    tableName="participants"
     columnNames="first_name, last_name"/>
 
   <rollback>
-    <dropTable tableName="participation"/>
+    <dropTable tableName="participants"/>
   </rollback>
 </changeSet>
 
